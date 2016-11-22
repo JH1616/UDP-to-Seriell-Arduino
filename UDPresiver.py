@@ -1,21 +1,22 @@
 import socket
-import serial
+import serial #benoetigt pyseriell (hierzu sudo python setup.py install)
 
-UDP_IP = "192.168.188.10"
-UDP_PORT = 12000
+UDP_IP = "192.168.188.10" #eigene IP
+UDP_PORT = 12000 #eigener Port
  
 sock = socket.socket(socket.AF_INET, # Internet
                       socket.SOCK_DGRAM) # UDP
 sock.bind((UDP_IP, UDP_PORT))
 
-for i in range(10):
-  j = i + 1
+#zum automatischen finden des arduinos unter linux
+for i in range(10): 
+  j = i + 1 #/dev/ttyACM0 bei uns durch irgendein anderes geraet schon vergeben
   try:
-    ser = serial.Serial(('/dev/ttyACM' + str(j)), 9600)
+    ser = serial.Serial(('/dev/ttyACM' + str(j)), 9600) #9600 baud
     print('/dev/ttyACM' + str(j))
     break
   except:
-    print "kein Arduino gefunden"
+    print (str('/dev/ttyACM' + str(j) + "kein Arduino gefunden"))
 
  
 while True:
